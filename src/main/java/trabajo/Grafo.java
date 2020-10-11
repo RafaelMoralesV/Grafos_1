@@ -34,4 +34,14 @@ public class Grafo {
 		vertAdyacentes.get(v1).add(v2);
 		vertAdyacentes.get(v2).add(v2);
 	}
+	void quitarArista(String nombre1, String nombre2) {
+	    Vertice v1 = new Vertice(nombre1);
+	    Vertice v2 = new Vertice(nombre2);
+	    List<Vertice> eV1 = vertAdyacentes.get(v1);
+	    List<Vertice> eV2 = vertAdyacentes.get(v2);
+	    if (eV1 != null)
+	        eV1.remove(v2);
+	    if (eV2 != null)
+	        eV2.remove(v1);
+	} 
 }
