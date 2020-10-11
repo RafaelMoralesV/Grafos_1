@@ -5,14 +5,16 @@ import java.util.*;
 public class Grafo {
 	private Map<Vertice, List<Vertice>> vertAdyacentes;
 
+	// Getter
 	public Map<Vertice, List<Vertice>> getVertAdyacentes() {
 		return vertAdyacentes;
 	}
-
+	// Setter
 	public void setVertAdyacentes(Map<Vertice, List<Vertice>> vertAdyacentes) {
 		this.vertAdyacentes = vertAdyacentes;
 	}
 	
+	// Agregar nuevo vertice
 	void agregarVertice(String nombre) {
 		vertAdyacentes.putIfAbsent(new Vertice(nombre), new ArrayList<>());
 	}
@@ -27,6 +29,7 @@ public class Grafo {
 		vertAdyacentes.remove(new Vertice(nombre));
 	}
 	
+	// Agrega una arista entre vertices
 	void agregarArista(String nombre1, String nombre2) {
 		Vertice v1 = new Vertice(nombre1);
 		Vertice v2 = new Vertice(nombre2);
