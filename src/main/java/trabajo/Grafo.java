@@ -3,6 +3,11 @@ package trabajo;
 import java.util.*;
 
 public class Grafo {
+	/* Clase principal que describe un grafo basico
+	 * Contiene metodos para funcionar como grafo sin peso, con o sin direcciones para las aristas
+	 */
+	
+	
 	private Map<Vertice, List<Vertice>> vertAdyacentes;
 
 	// Getter
@@ -31,12 +36,17 @@ public class Grafo {
 	
 	// Agrega una arista entre vertices
 	void agregarArista(String nombre1, String nombre2) {
+		agregarAristaDir(nombre1, nombre2);
+		agregarAristaDir(nombre2, nombre1);
+	}
+	
+	// Agrega una arista en una sola direccion
+	void agregarAristaDir(String nombre1, String nombre2) {
 		Vertice v1 = new Vertice(nombre1);
 		Vertice v2 = new Vertice(nombre2);
-		
 		vertAdyacentes.get(v1).add(v2);
-		vertAdyacentes.get(v2).add(v2);
 	}
+	
 	void quitarArista(String nombre1, String nombre2) {
 	    Vertice v1 = new Vertice(nombre1);
 	    Vertice v2 = new Vertice(nombre2);

@@ -1,6 +1,9 @@
 package trabajo;
 
 public class Vertice {
+	
+	// Vertice o nodo para los grafos
+	
 	String nombre;
 	Vertice(String nombre){
 		this.nombre = nombre;
