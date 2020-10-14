@@ -21,8 +21,8 @@ public class GrafoPesado extends Grafo {
 		vertAdyacentes.get(v1).add(ar);
 	}
 	
-	void agregarArista(String nombre1, String nombre2, float peso) {
-		agregarAristaDir(nombre1, nombre2, peso);
-		agregarAristaDir(nombre2, nombre1, peso);
+	void agregarArista(String nameA, String nameB, float peso) {
+		agregarAristaDir(nameA, nameB, peso);
+		agregarAristaDir(nameB, nameA, peso);
 	}
 }

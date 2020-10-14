@@ -5,7 +5,8 @@ public class Arista {
 	/* Clase de apoyo diseñada para funcionar con grafos con peso
 	 */
 	private float peso;
-	private Vertice inicio, destino;
+	private Vertice inicio;
+	private Vertice destino;
 	
 	public float getPeso() {
 		return peso;

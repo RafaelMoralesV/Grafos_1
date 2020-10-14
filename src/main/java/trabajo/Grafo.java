@@ -9,6 +9,10 @@ public class Grafo {
 	
 	
 	private Map<Vertice, List<Vertice>> vertAdyacentes;
+	
+	public Grafo() {
+		vertAdyacentes = null;
+	}
 
 	// Getter
 	public Map<Vertice, List<Vertice>> getVertAdyacentes() {
@@ -18,6 +22,10 @@ public class Grafo {
 	public void setVertAdyacentes(Map<Vertice, List<Vertice>> vertAdyacentes) {
 		this.vertAdyacentes = vertAdyacentes;
 	}
+	
+	//								//
+	// 			VERTICES			//
+	//								//
 	
 	// Agregar nuevo vertice
 	void agregarVertice(String nombre) {
@@ -34,11 +42,9 @@ public class Grafo {
 		vertAdyacentes.remove(new Vertice(nombre));
 	}
 	
-	// Agrega una arista entre vertices
-	void agregarArista(String nombre1, String nombre2) {
-		agregarAristaDir(nombre1, nombre2);
-		agregarAristaDir(nombre2, nombre1);
-	}
+	//								//
+	// 			ARISTAS				//
+	//								//
 	
 	// Agrega una arista en una sola direccion
 	void agregarAristaDir(String nombre1, String nombre2) {
@@ -47,14 +53,24 @@ public class Grafo {
 		vertAdyacentes.get(v1).add(v2);
 	}
 	
-	void quitarArista(String nombre1, String nombre2) {
-	    Vertice v1 = new Vertice(nombre1);
+	// Agrega una arista entre vertices
+	void agregarArista(String nameA, String nameB) {
+		agregarAristaDir(nameA, nameB);
+		agregarAristaDir(nameB, nameA);
+	}
+	
+	// Elimina una sola arista entre <nombre1> y <nombre2>
+	void eliminarAristaDir(String nombre1, String nombre2) {
+		Vertice v1 = new Vertice(nombre1);
 	    Vertice v2 = new Vertice(nombre2);
 	    List<Vertice> eV1 = vertAdyacentes.get(v1);
-	    List<Vertice> eV2 = vertAdyacentes.get(v2);
 	    if (eV1 != null)
 	        eV1.remove(v2);
-	    if (eV2 != null)
-	        eV2.remove(v1);
+	}
+	
+	// Elimina todas las aristas entre <nombre1> y <nombre2>
+	void eliminarAristas(String nameA, String nameB) {
+	    eliminarAristaDir(nameA, nameB);
+	    eliminarAristaDir(nameB, nameA);
 	} 
 }
