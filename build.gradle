@@ -10,7 +10,8 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
     id 'application'
-    id "org.sonarqube" version "3.0"
+    id 'org.sonarqube' version '3.0'
+    id 'jacoco'
 }
 
 repositories {
@@ -37,9 +38,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 version = '0.1'
 
 // Sets up the main class for the application plugin
-application{
-	mainClass = 'trabajo.HolaMundo'
-}
+
 
 // Sets up the main class for the jar files
 jar {

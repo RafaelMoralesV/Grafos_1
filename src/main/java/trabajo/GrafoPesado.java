@@ -1,7 +1,6 @@
 package trabajo;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GrafoPesado extends Grafo {
 	
@@ -9,6 +8,10 @@ public class GrafoPesado extends Grafo {
 	 */
 	
 	private Map<Vertice, List<Arista>> vertAdyacentes;
+	
+	public GrafoPesado() {
+		this.vertAdyacentes = new HashMap<>();
+	}
 	
 	// Agregar y eliminar vertice son funciones heredadas de Grafo
 	

@@ -11,14 +11,13 @@ public class Grafo {
 	private Map<Vertice, List<Vertice>> vertAdyacentes;
 	
 	public Grafo() {
-		vertAdyacentes = null;
+		this.vertAdyacentes = new HashMap<>();
 	}
-
-	// Getter
+	
 	public Map<Vertice, List<Vertice>> getVertAdyacentes() {
 		return vertAdyacentes;
 	}
-	// Setter
+
 	public void setVertAdyacentes(Map<Vertice, List<Vertice>> vertAdyacentes) {
 		this.vertAdyacentes = vertAdyacentes;
 	}
@@ -26,20 +25,20 @@ public class Grafo {
 	//								//
 	// 			VERTICES			//
 	//								//
-	
+
 	// Agregar nuevo vertice
-	void agregarVertice(String nombre) {
-		vertAdyacentes.putIfAbsent(new Vertice(nombre), new ArrayList<>());
+	public void agregarVertice(String nombre) {
+		this.vertAdyacentes.putIfAbsent(new Vertice(nombre), new ArrayList<>());
 	}
 	
-	void eliminarVertice(String nombre) {
+	public void eliminarVertice(String nombre) {
 		Vertice v = new Vertice(nombre);
 		
 		// Elimina la lista de vertices adyacentes a 'nombre'
-		vertAdyacentes.values().stream().forEach(e -> e.remove(v));
+		this.vertAdyacentes.values().stream().forEach(e -> e.remove(v));
 		
 		// Elimina el vertice del grafo
-		vertAdyacentes.remove(new Vertice(nombre));
+		this.vertAdyacentes.remove(new Vertice(nombre));
 	}
 	
 	//								//
@@ -47,30 +46,43 @@ public class Grafo {
 	//								//
 	
 	// Agrega una arista en una sola direccion
-	void agregarAristaDir(String nombre1, String nombre2) {
+	public void agregarAristaDir(String nombre1, String nombre2) {
 		Vertice v1 = new Vertice(nombre1);
 		Vertice v2 = new Vertice(nombre2);
-		vertAdyacentes.get(v1).add(v2);
+		this.vertAdyacentes.get(v1).add(v2);
 	}
 	
 	// Agrega una arista entre vertices
-	void agregarArista(String nameA, String nameB) {
-		agregarAristaDir(nameA, nameB);
-		agregarAristaDir(nameB, nameA);
+	public void agregarArista(String nameA, String nameB) {
+		this.agregarAristaDir(nameA, nameB);
+		this.agregarAristaDir(nameB, nameA);
 	}
 	
 	// Elimina una sola arista entre <nombre1> y <nombre2>
-	void eliminarAristaDir(String nombre1, String nombre2) {
+	public void eliminarAristaDir(String nombre1, String nombre2) {
 		Vertice v1 = new Vertice(nombre1);
 	    Vertice v2 = new Vertice(nombre2);
-	    List<Vertice> eV1 = vertAdyacentes.get(v1);
+	    List<Vertice> eV1 = this.vertAdyacentes.get(v1);
 	    if (eV1 != null)
 	        eV1.remove(v2);
 	}
 	
 	// Elimina todas las aristas entre <nombre1> y <nombre2>
-	void eliminarAristas(String nameA, String nameB) {
-	    eliminarAristaDir(nameA, nameB);
-	    eliminarAristaDir(nameB, nameA);
+	public void eliminarAristas(String nameA, String nameB) {
+	    this.eliminarAristaDir(nameA, nameB);
+	    this.eliminarAristaDir(nameB, nameA);
 	} 
+	
+	//								//
+	// 			UTILS				//
+	//								//
+	
+	public int sizeVertices() {
+		return this.vertAdyacentes.size();
+	}
+	
+	public int sizeAdyacentes(String nombre) {
+		Vertice v = new Vertice(nombre);
+		return this.vertAdyacentes.get(v).size();
+	}
 }
