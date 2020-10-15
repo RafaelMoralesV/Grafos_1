@@ -14,14 +14,6 @@ public class Grafo {
 		this.vertAdyacentes = new HashMap<>();
 	}
 	
-	public Map<Vertice, List<Vertice>> getVertAdyacentes() {
-		return vertAdyacentes;
-	}
-
-	public void setVertAdyacentes(Map<Vertice, List<Vertice>> vertAdyacentes) {
-		this.vertAdyacentes = vertAdyacentes;
-	}
-	
 	//								//
 	// 			VERTICES			//
 	//								//

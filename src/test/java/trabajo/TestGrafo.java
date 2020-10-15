@@ -39,9 +39,15 @@ public class TestGrafo {
 		assertEquals("Nueva Arista en A", 2, testUno.sizeAdyacentes("A"));
 	}
 	
-	@Test public void testRemoveArista() {
+	@Test public void testRemoveAristaDir() {
 		testUno.eliminarAristaDir("A", "B");
 		assertEquals("Eliminada una arista de A", 0, testUno.sizeAdyacentes("A"));
+		assertEquals("Se mantiene una arista de B -> A", 1, testUno.sizeAdyacentes("B"));
+	}
+	
+	@Test public void testRemoveAristas() {
+		testUno.eliminarAristas("A", "B");
+		assertEquals("Ninguna arista entre A y B", 0, testUno.sizeAdyacentes("A") + testUno.sizeAdyacentes("B"));
 	}
 	
 	@After
