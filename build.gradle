@@ -46,3 +46,10 @@ jar {
 		attributes 'Main-Class': 'trabajo.HolaMundo'
 	}
 }
+
+// Enables sonarqube to see testCoverage and Unitary test results
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
