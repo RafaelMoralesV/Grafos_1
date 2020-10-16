@@ -133,5 +133,33 @@ public class Grafo {
 		}
 		return true;
 	}
-	
+
+	public void Euleriano() {
+		int cont,impares = 0;
+		Set<Vertice> keys = vertAdyacentes.keySet();
+		Vertice[] arrVerts = keys.toArray(new Vertice[keys.size()]);
+		Vector<Integer> CantAdj = new Vector<>();
+		for (int i = 0; i < arrVerts.length; i++) {
+			cont = 0;
+			for (int j = 0; j < arrVerts.length; j++) {
+
+				if (vertAdyacentes.get(arrVerts[i]).contains(arrVerts[j]))
+					cont++;
+				if (j == vertAdyacentes.size())
+					CantAdj.add(cont);
+
+			}
+		}
+		for (int i = 0; i < arrVerts.length; i++)
+		{
+			if(CantAdj.elementAt(i) % 2 == 1 )
+				impares++;
+		}
+		if(impares > 2)
+			System.out.println("El grafo no tiene camino Euleriano");
+		else
+			System.out.println("Equisde");
+
+	}
+
 }

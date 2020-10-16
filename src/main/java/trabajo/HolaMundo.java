@@ -3,7 +3,7 @@ package trabajo;
 
 public class HolaMundo{
 	public static void main(String[] args) {
-		Grafo g = new Grafo();
+		/*Grafo g = new Grafo();
 		g.agregarVertice("A");
 	    g.agregarVertice("B");
 	    g.agregarVertice("C");
@@ -13,5 +13,6 @@ public class HolaMundo{
 	    g.agregarArista("B", "D");
 	    g.generarMatriz();
 	    System.out.print(g.toString());
+	    g.Euleriano();*/
 	}
 }
