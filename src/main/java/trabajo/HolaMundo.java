@@ -6,10 +6,10 @@ public class HolaMundo {
 		g.agregarVertice("A");
 	    g.agregarVertice("B");
 	    g.agregarVertice("C");
-	    //g.agregarVertice("4");
+	    g.agregarVertice("D");
 	    g.agregarArista("A", "B");
 	    g.agregarAristaDir("A", "C");
-	    //g.agregarArista("2", "4");
+	    g.agregarArista("B", "D");
 	    g.Matriz();
 	    System.out.print(g.toString());
 	}

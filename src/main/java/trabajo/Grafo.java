@@ -7,14 +7,10 @@ public class Grafo {
 	 * Contiene metodos para funcionar como grafo sin peso, con o sin direcciones para las aristas
 	 */
 	
-	
 	private Map<Vertice, List<Vertice>> vertAdyacentes;
-	private int numVertices;
-	private boolean MatrizAd[][]; 
 	
 	public Grafo() {
 		this.vertAdyacentes = new HashMap<>();
-		this.numVertices = 0;
 	}
 	
 	//								//
@@ -84,15 +80,18 @@ public class Grafo {
 	
 	public boolean[][] Matriz ()
 	{
-		this.numVertices = vertAdyacentes.size();
-		MatrizAd = new boolean [numVertices][numVertices];
+		// Dimensiones y nueva matriz de adyacencia
+		int numVerts = vertAdyacentes.size();
+		boolean[][] MatrizAd = new boolean [numVerts][numVerts];
 		
+		// Generado nuevo arreglo con los vertices en el grafo
 		Set<Vertice> keys = vertAdyacentes.keySet();
-		Vertice[] arregloVertices = keys.toArray(new Vertice[keys.size()]);
+		Vertice[] arrVerts = keys.toArray(new Vertice[keys.size()]);
 		
-		for(int i = 0; i<arregloVertices.length; i++) {
-			for(int j=0; j<arregloVertices.length; j++) {
-				MatrizAd[i][j] = vertAdyacentes.get(arregloVertices[i]).contains(arregloVertices[j]);
+		// Se rellena la matriz segun la lista asociada a cada vertice
+		for(int i = 0; i<arrVerts.length; i++) {
+			for(int j=0; j<arrVerts.length; j++) {
+				MatrizAd[i][j] = vertAdyacentes.get(arrVerts[i]).contains(arrVerts[j]);
 			}
 		}
 		return MatrizAd;
@@ -101,7 +100,9 @@ public class Grafo {
 	public String toString()
 	{
 		StringBuilder s = new StringBuilder();
-	    for (int i = 0; i < numVertices; i++) {
+		boolean[][] MatrizAd = this.Matriz();
+		
+	    for (int i = 0; i < vertAdyacentes.size(); i++) {
 	      s.append(i + ": ");
 	      for (boolean j : MatrizAd[i]) {
 	        s.append((j ? 1 : 0) + " ");
