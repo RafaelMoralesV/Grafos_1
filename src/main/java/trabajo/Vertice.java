@@ -14,6 +14,9 @@ public class Vertice {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	
+	// Codigo generado por eclipse, para poner verificar igualdad entre dos instancias de esta clase
 	@Override
 	public int hashCode() {
 		final int prime = 31;

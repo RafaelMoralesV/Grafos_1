@@ -40,4 +40,38 @@ public class Arista {
 		this.inicio = in;
 		this.destino = out;
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
+		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
+		result = prime * result + Float.floatToIntBits(peso);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arista other = (Arista) obj;
+		if (destino == null) {
+			if (other.destino != null)
+				return false;
+		} else if (!destino.equals(other.destino))
+			return false;
+		if (inicio == null) {
+			if (other.inicio != null)
+				return false;
+		} else if (!inicio.equals(other.inicio))
+			return false;
+		if (Float.floatToIntBits(peso) != Float.floatToIntBits(other.peso))
+			return false;
+		return true;
+	}
 }

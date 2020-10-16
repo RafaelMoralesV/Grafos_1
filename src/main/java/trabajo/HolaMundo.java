@@ -1,6 +1,7 @@
 package trabajo;
 
-public class HolaMundo {
+
+public class HolaMundo{
 	public static void main(String[] args) {
 		Grafo g = new Grafo();
 		g.agregarVertice("A");
@@ -10,7 +11,7 @@ public class HolaMundo {
 	    g.agregarArista("A", "B");
 	    g.agregarAristaDir("A", "C");
 	    g.agregarArista("B", "D");
-	    g.Matriz();
+	    g.generarMatriz();
 	    System.out.print(g.toString());
 	}
 }

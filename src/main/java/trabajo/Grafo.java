@@ -78,11 +78,11 @@ public class Grafo {
 	}
 	
 	
-	public boolean[][] Matriz ()
+	public boolean[][] generarMatriz ()
 	{
 		// Dimensiones y nueva matriz de adyacencia
 		int numVerts = vertAdyacentes.size();
-		boolean[][] MatrizAd = new boolean [numVerts][numVerts];
+		boolean[][] matrizAdy = new boolean [numVerts][numVerts];
 		
 		// Generado nuevo arreglo con los vertices en el grafo
 		Set<Vertice> keys = vertAdyacentes.keySet();
@@ -91,20 +91,20 @@ public class Grafo {
 		// Se rellena la matriz segun la lista asociada a cada vertice
 		for(int i = 0; i<arrVerts.length; i++) {
 			for(int j=0; j<arrVerts.length; j++) {
-				MatrizAd[i][j] = vertAdyacentes.get(arrVerts[i]).contains(arrVerts[j]);
+				matrizAdy[i][j] = vertAdyacentes.get(arrVerts[i]).contains(arrVerts[j]);
 			}
 		}
-		return MatrizAd;
+		return matrizAdy;
 	}
 	
 	public String toString()
 	{
 		StringBuilder s = new StringBuilder();
-		boolean[][] MatrizAd = this.Matriz();
+		boolean[][] matrizAdy = this.generarMatriz();
 		
 	    for (int i = 0; i < vertAdyacentes.size(); i++) {
 	      s.append(i + ": ");
-	      for (boolean j : MatrizAd[i]) {
+	      for (boolean j : matrizAdy[i]) {
 	        s.append((j ? 1 : 0) + " ");
 	      }
 	      s.append("\n");
