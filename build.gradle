@@ -39,6 +39,9 @@ targetCompatibility = JavaVersion.VERSION_1_8
 version = '0.1'
 
 // Sets up the main class for the application plugin
+application{
+	mainClass = 'trabajo.HolaMundo'
+}
 
 
 // Sets up the main class for the jar files

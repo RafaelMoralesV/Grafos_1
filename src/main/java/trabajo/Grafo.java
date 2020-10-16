@@ -12,9 +12,9 @@ public class Grafo {
 	private int numVertices;
 	private boolean MatrizAd[][]; 
 	
-	public Grafo(int a) {
+	public Grafo() {
 		this.vertAdyacentes = new HashMap<>();
-		this.numVertices= a;
+		this.numVertices = 0;
 	}
 	
 	//								//
@@ -80,11 +80,24 @@ public class Grafo {
 		Vertice v = new Vertice(nombre);
 		return this.vertAdyacentes.get(v).size();
 	}
-	public void Matriz (int numVertices)
+	
+	
+	public boolean[][] Matriz ()
 	{
-		this.numVertices = numVertices;
+		this.numVertices = vertAdyacentes.size();
 		MatrizAd = new boolean [numVertices][numVertices];
+		
+		Set<Vertice> keys = vertAdyacentes.keySet();
+		Vertice[] arregloVertices = keys.toArray(new Vertice[keys.size()]);
+		
+		for(int i = 0; i<arregloVertices.length; i++) {
+			for(int j=0; j<arregloVertices.length; j++) {
+				MatrizAd[i][j] = vertAdyacentes.get(arregloVertices[i]).contains(arregloVertices[j]);
+			}
+		}
+		return MatrizAd;
 	}
+	
 	public String toString()
 	{
 		StringBuilder s = new StringBuilder();
