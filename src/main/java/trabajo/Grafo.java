@@ -161,5 +161,43 @@ public class Grafo {
 			System.out.println("Equisde");
 
 	}
+	public void Hamiltoniano() {
+        int a = 0, b = 0;
+        int aux1=0;
+        int grado1=0;
+        int grado2=0;
+        int gradovertinicial=0;
+        int gradovertfinal=0;
+        int [] grados = new int[vertAdyacentes.size()];
+		boolean[][] matrizAdy = this.generarMatriz();
+		for(int i = 0; i < vertAdyacentes.size(); i++) {
+			for(int j = 0; j < vertAdyacentes.size(); j++) {
+				if(matrizAdy[i][j] == true) {
+					aux1++;
+				}
+				grados[i] = aux1;
+			}
+		}
+		for(int k = 0; k<vertAdyacentes.size(); k++) {
+			grado1 = grados[k];
+			for(int l = k+1; l < vertAdyacentes.size(); l++) {
+				grado2 = grados[l];
+				if(grado2 + grado1 >= vertAdyacentes.size()-1) {
+					Scanner entrada1 = new Scanner(System.in);
+					System.out.println("Ingrece el vertice inicial");
+					a = entrada1.nextInt();
+					grados[a] = gradovertinicial;
+					Scanner entrada2 = new Scanner(System.in);
+					System.out.println("Ingrece el vertice final");
+					b = entrada2.nextInt();
+					grados[b] = gradovertfinal;
+					
+					if(grado2 + grado1 == gradovertinicial + gradovertfinal) {
+						System.out.println("El grafo es hamiltoniano");
+					}
+				}
+			}
+		}
+	}
 
 }
