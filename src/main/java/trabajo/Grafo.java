@@ -14,9 +14,9 @@ public class Grafo {
 		this.vertAdyacentes = new HashMap<>();
 	}
 
-	// //
-	// VERTICES //
-	// //
+	// 						//
+	// 		VERTICES 		//
+	// 						//
 
 	// Agregar nuevo vertice
 	public void agregarVertice(String nombre) {
@@ -33,9 +33,9 @@ public class Grafo {
 		this.vertAdyacentes.remove(new Vertice(nombre));
 	}
 
-	// //
-	// ARISTAS //
-	// //
+	// 						//
+	// 		ARISTAS 		//
+	// 						//
 
 	// Agrega una arista en una sola direccion
 	public void agregarAristaDir(String nombre1, String nombre2) {
@@ -65,9 +65,9 @@ public class Grafo {
 		this.eliminarAristaDir(nameB, nameA);
 	}
 
-	// //
-	// UTILS //
-	// //
+	// 					//
+	// 		UTILS 		//
+	// 					//
 
 	public int sizeVertices() {
 		return this.vertAdyacentes.size();
@@ -115,7 +115,7 @@ public class Grafo {
 	
 	@SuppressWarnings("unlikely-arg-type")
 	public boolean esConexo() {
-		boolean[][] matrizAdy = this.generarMatriz();		
+		boolean[][] matrizAdy = this.generarMatriz();
 		
 		for(int i = 0; i < vertAdyacentes.size(); i++) {
 			// Checkea valores para columnas
