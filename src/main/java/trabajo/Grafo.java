@@ -223,10 +223,11 @@ public class Grafo {
 		camino.pop();
 		return camino;
 	}
-	
+		
 	private boolean esHamiltoneano(LinkedList<Vertice> camino) {
 		int ultimo = camino.size() - 1;
 		
+		// Comprobar que el camino contiene todos los vertices y ninguno esta repetido
 		Set<Vertice> set = new HashSet<>(camino);
 		if(set.size() != vertAdyacentes.size()) {
 			return false;

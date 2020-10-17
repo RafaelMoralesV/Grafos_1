@@ -82,9 +82,13 @@ public class TestGrafo {
 	    g.agregarArista("C", "D");
 	    g.agregarArista("C", "E");
 	    g.agregarArista("D", "E");
+	    
+	    assertEquals(Collections.emptyList(), g.caminoHamiltoneano());
+	    
+	    // Agregar esta arista lo vuelve hamiltoneano
 	    g.agregarArista("D", "A");
-
-	    assertNotEquals(null, g.caminoHamiltoneano());
+	    assertNotEquals(Collections.emptyList(), g.caminoHamiltoneano());
+	    
 	}
 	
 	// PRUEBAS SOBRE UTILIDADES

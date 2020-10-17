@@ -2,6 +2,9 @@ package trabajo;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,5 +69,30 @@ public class TestGrafoPesado {
 	@Test public void testStringMatrizPeso() {
 		String stringEsperada = "0: - 5.0 - \n1: 5.0 - - \n2: - - - \n";
 		assertEquals(stringEsperada, testSubject.toStringPeso());
+	}
+	
+	@Test public void testDijkstra() {
+		GrafoPesado p = new GrafoPesado();
+		p.agregarVertice("A");
+		p.agregarVertice("B");
+		p.agregarVertice("C");
+		p.agregarVertice("D");
+		p.agregarVertice("E");
+		
+		p.agregarArista("A", "B", 6);
+		p.agregarArista("A", "D", 1);
+		p.agregarArista("B", "D", 2);
+		p.agregarArista("B", "E", 2);
+		p.agregarArista("D", "E", 1);
+		p.agregarArista("C", "B", 5);
+		p.agregarArista("C", "E", 5);
+		
+		List<Vertice> l = new ArrayList<>();
+		l.add(new Vertice("A"));
+		l.add(new Vertice("D"));
+		l.add(new Vertice("E"));
+		l.add(new Vertice("C"));
+		
+		assertEquals(l, p.dijkstra("A", "C"));
 	}
 }
