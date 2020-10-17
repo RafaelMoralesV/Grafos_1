@@ -8,7 +8,7 @@ public class Grafo {
 	 * como grafo sin peso, con o sin direcciones para las aristas
 	 */
 
-	private Map<Vertice, List<Vertice>> vertAdyacentes;
+	protected Map<Vertice, List<Vertice>> vertAdyacentes;
 
 	public Grafo() {
 		this.vertAdyacentes = new HashMap<>();
@@ -24,17 +24,20 @@ public class Grafo {
 	}
 
 	public void eliminarVertice(String nombre) {
-		Vertice v = new Vertice(nombre);
-
-		// Elimina la lista de vertices adyacentes a 'nombre'
-		this.vertAdyacentes.values().stream().forEach(e -> e.remove(v));
-
-		// Elimina el vertice del grafo
-		this.vertAdyacentes.remove(new Vertice(nombre));
+		if(this.existsIn(nombre)) {
+			Vertice v = new Vertice(nombre);
+		
+			// Elimina la lista de vertices adyacentes a 'nombre'
+			this.vertAdyacentes.values().stream().forEach(e -> e.remove(v));
+		
+			// Elimina el vertice del grafo
+			this.vertAdyacentes.remove(new Vertice(nombre));
+		}
 	}
 	
 	public List<Vertice> adyacentes(String vertice){
-		return vertAdyacentes.get(new Vertice(vertice));
+		// Retorna los vertices adyacentes a <vertice> o una lista vacia si el vertice no existe
+		return (this.existsIn(vertice))?vertAdyacentes.get(new Vertice(vertice)):Collections.emptyList();
 	}
 
 	// 						//
@@ -43,9 +46,11 @@ public class Grafo {
 
 	// Agrega una arista en una sola direccion
 	public void agregarAristaDir(String nombre1, String nombre2) {
-		Vertice v1 = new Vertice(nombre1);
-		Vertice v2 = new Vertice(nombre2);
-		this.vertAdyacentes.get(v1).add(v2);
+		if(this.existsIn(nombre1) && this.existsIn(nombre2)) {
+			Vertice v1 = new Vertice(nombre1);
+			Vertice v2 = new Vertice(nombre2);
+			this.vertAdyacentes.get(v1).add(v2);
+		}
 	}
 
 	// Agrega una arista entre vertices
@@ -56,11 +61,13 @@ public class Grafo {
 
 	// Elimina una sola arista entre <nombre1> y <nombre2>
 	public void eliminarAristaDir(String nombre1, String nombre2) {
-		Vertice v1 = new Vertice(nombre1);
-		Vertice v2 = new Vertice(nombre2);
-		List<Vertice> eV1 = this.vertAdyacentes.get(v1);
-		if (eV1 != null)
-			eV1.remove(v2);
+		if(this.existsIn(nombre1)) {
+			Vertice v1 = new Vertice(nombre1);
+			Vertice v2 = new Vertice(nombre2);
+			List<Vertice> eV1 = this.vertAdyacentes.get(v1);
+			if (eV1 != null)
+				eV1.remove(v2);
+		}
 	}
 
 	// Elimina todas las aristas entre <nombre1> y <nombre2>
@@ -81,13 +88,17 @@ public class Grafo {
 		Vertice v = new Vertice(nombre);
 		return this.vertAdyacentes.get(v).size();
 	}
-
+	
+	public boolean existsIn(String nombre) {
+		Vertice v = new Vertice(nombre);
+		return vertAdyacentes.containsKey(v);
+	}
 	
 	//									//
 	// 		MATRIZ DE ADYACENCIA 		//
 	// 									//
 	
-	public boolean[][] generarMatriz() {
+	public boolean[][] generarMatrizAdyacencia() {
 		// Dimensiones y nueva matriz de adyacencia
 		int numVerts = vertAdyacentes.size();
 		boolean[][] matrizAdy = new boolean[numVerts][numVerts];
@@ -107,7 +118,7 @@ public class Grafo {
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		boolean[][] matrizAdy = this.generarMatriz();
+		boolean[][] matrizAdy = this.generarMatrizAdyacencia();
 
 		for (int i = 0; i < vertAdyacentes.size(); i++) {
 			s.append(i + ": ");
@@ -127,7 +138,7 @@ public class Grafo {
 	
 	
 	public boolean esConexo() {
-		boolean[][] matrizAdy = this.generarMatriz();
+		boolean[][] matrizAdy = this.generarMatrizAdyacencia();
 		
 		for(int i = 0; i < vertAdyacentes.size(); i++) {
 			// Checkea valores para columnas

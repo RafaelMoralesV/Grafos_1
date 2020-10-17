@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.Collections;
+
 //import java.util.List;
 
 public class TestGrafo {
@@ -32,6 +34,14 @@ public class TestGrafo {
 	@Test public void testRemove() {
 		testUno.eliminarVertice("D");
 		assertEquals("Eliminado vertice", 3, testUno.sizeVertices());
+	}
+	
+	@Test public void testAdyacentes() {
+		testUno.agregarVertice("AUX");
+		testUno.agregarArista("A", "AUX");
+		assertEquals(2, testUno.adyacentes("A").size(), 0.0);
+		
+		assertEquals(Collections.emptyList(), testUno.adyacentes("No Vertice"));
 	}
 	
 	// PRUEBAS SOBRE ARISTAS
@@ -75,6 +85,13 @@ public class TestGrafo {
 	    g.agregarArista("D", "A");
 
 	    assertNotEquals(null, g.caminoHamiltoneano());
+	}
+	
+	// PRUEBAS SOBRE UTILIDADES
+	
+	@Test public void testToString() {
+		String stringEsperada = "0: 0 1 0 \n1: 1 0 0 \n2: 0 0 0 \n";
+		assertEquals(stringEsperada, testUno.toString());
 	}
 	
 	@After
