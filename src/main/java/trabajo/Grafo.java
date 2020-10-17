@@ -32,6 +32,10 @@ public class Grafo {
 		// Elimina el vertice del grafo
 		this.vertAdyacentes.remove(new Vertice(nombre));
 	}
+	
+	public List<Vertice> adyacentes(String vertice){
+		return vertAdyacentes.get(new Vertice(vertice));
+	}
 
 	// 						//
 	// 		ARISTAS 		//
@@ -78,6 +82,11 @@ public class Grafo {
 		return this.vertAdyacentes.get(v).size();
 	}
 
+	
+	//									//
+	// 		MATRIZ DE ADYACENCIA 		//
+	// 									//
+	
 	public boolean[][] generarMatriz() {
 		// Dimensiones y nueva matriz de adyacencia
 		int numVerts = vertAdyacentes.size();
@@ -112,8 +121,11 @@ public class Grafo {
 	}
 	
 	
+	//									//
+	// 		PROPIEDADES DEL GRAFO 		//
+	// 									//
 	
-	@SuppressWarnings("unlikely-arg-type")
+	
 	public boolean esConexo() {
 		boolean[][] matrizAdy = this.generarMatriz();
 		
@@ -121,24 +133,32 @@ public class Grafo {
 			// Checkea valores para columnas
 			boolean col = false;
 			for(int j = 0; j < vertAdyacentes.size(); j++) {
-				if(matrizAdy[i][j]) {
+				if(matrizAdy[j][i]) {
 					col = true;
 					break;
 				}
 			}
-			// Checkea valores para filas, y si solo existen 0 en ambas concluye que el grafo es inconexo
-			if(!Arrays.asList(matrizAdy[i]).contains(true) && col) {
+			boolean fil = false;
+			for(int j = 0; j < vertAdyacentes.size(); j++) {
+				if(matrizAdy[i][j]) {
+					fil = true;
+					break;
+				}
+			}
+			if(!(fil || col)) {
 				return false;
 			}
+			
 		}
 		return true;
 	}
 
-	public void Euleriano() {
-		int cont,impares = 0;
+	public boolean esEuleriano() {
+		int cont;
+		int impares = 0;
 		Set<Vertice> keys = vertAdyacentes.keySet();
 		Vertice[] arrVerts = keys.toArray(new Vertice[keys.size()]);
-		Vector<Integer> CantAdj = new Vector<>();
+		Vector<Integer> cantAdj = new Vector<>();
 		for (int i = 0; i < arrVerts.length; i++) {
 			cont = 0;
 			for (int j = 0; j < arrVerts.length; j++) {
@@ -146,60 +166,60 @@ public class Grafo {
 				if (vertAdyacentes.get(arrVerts[i]).contains(arrVerts[j]))
 					cont++;
 				if (j == vertAdyacentes.size())
-					CantAdj.add(cont);
-
+					cantAdj.add(cont);
 			}
 		}
 		for (int i = 0; i < arrVerts.length; i++)
 		{
-			if(CantAdj.elementAt(i) % 2 == 1 )
+			if(cantAdj.elementAt(i) % 2 == 1 )
 				impares++;
 		}
-		if(impares > 2)
-			System.out.println("El grafo no tiene camino Euleriano");
-		else
-			System.out.println("Equisde");
+		
+		return impares < 2;
 
 	}
-	public void Hamiltoniano() {
-        int a = 0, b = 0;
-        int aux1=0;
-        int grado1=0;
-        int grado2=0;
-        int gradovertinicial=0;
-        int gradovertfinal=0;
-        int [] grados = new int[vertAdyacentes.size()];
-		boolean[][] matrizAdy = this.generarMatriz();
-		for(int i = 0; i < vertAdyacentes.size(); i++) {
-			for(int j = 0; j < vertAdyacentes.size(); j++) {
-				if(matrizAdy[i][j] == true) {
-					aux1++;
-				}
-				grados[i] = aux1;
+	
+	public List<Vertice> caminoHamiltoneano(){
+		if (!this.esConexo()) {
+			return Collections.emptyList();
+		}
+		Set<Vertice> keys = vertAdyacentes.keySet();
+		
+		for(Vertice v : keys) {
+			Deque<Vertice> camino = new LinkedList<>();
+			generarCaminos(camino, v);
+			if(!camino.isEmpty()) {
+				return new ArrayList<>(camino);
 			}
 		}
-		for(int k = 0; k<vertAdyacentes.size(); k++) {
-			grado1 = grados[k];
-			for(int l = k+1; l < vertAdyacentes.size(); l++) {
-				grado2 = grados[l];
-				if(grado2 + grado1 >= vertAdyacentes.size()-1) {
-					Scanner entrada1 = new Scanner(System.in);
-					System.out.println("Ingrece el vertice inicial");
-					a = entrada1.nextInt();
-					grados[a] = gradovertinicial;
-					Scanner entrada2 = new Scanner(System.in);
-					System.out.println("Ingrece el vertice final");
-					b = entrada2.nextInt();
-					grados[b] = gradovertfinal;
-					
-					if(grado2 + grado1 == gradovertinicial + gradovertfinal) {
-						System.out.println("El grafo es hamiltoniano");
-					}else{
-						System.out.println("El grafo no es hamiltoniano");
-					}
-				}
-			}
-		}
+		return Collections.emptyList();
 	}
-
+	
+	private Deque<Vertice> generarCaminos(Deque<Vertice> camino, Vertice vec){
+		camino.push(vec);
+		
+		if(!camino.containsAll(vertAdyacentes.get(vec))) {
+			for(Vertice v : this.adyacentes(vec.getNombre())) {
+				if(camino.contains(v)) {
+					continue;
+				}
+				generarCaminos(camino, v);
+			}
+		}
+		if(esHamiltoneano((LinkedList<Vertice>) camino)) {
+			return camino;
+		}
+		camino.pop();
+		return camino;
+	}
+	
+	private boolean esHamiltoneano(LinkedList<Vertice> camino) {
+		int ultimo = camino.size() - 1;
+		
+		Set<Vertice> set = new HashSet<>(camino);
+		if(set.size() != vertAdyacentes.size()) {
+			return false;
+		}
+		return (vertAdyacentes.get(camino.get(0)).contains(camino.get(ultimo)));
+	}
 }

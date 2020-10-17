@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+//import java.util.List;
+
 public class TestGrafo {
 	private Grafo testUno = new Grafo();
 	
@@ -48,6 +50,31 @@ public class TestGrafo {
 	@Test public void testRemoveAristas() {
 		testUno.eliminarAristas("A", "B");
 		assertEquals("Ninguna arista entre A y B", 0, testUno.sizeAdyacentes("A") + testUno.sizeAdyacentes("B"));
+	}
+	
+	// PRUEBAS SOBRE PROPIEDADES DEL GRAFO
+	
+	@Test public void testCaminoHamiltoniano() {
+		Grafo g = new Grafo();
+		g.agregarVertice("A");
+	    g.agregarVertice("B");
+	    g.agregarVertice("C");
+	    g.agregarVertice("D");
+	    g.agregarVertice("E");
+	    g.agregarVertice("F");
+	    
+	    
+	    g.agregarArista("A", "B");
+	    g.agregarArista("A", "C");
+	    g.agregarArista("A", "F");
+	    g.agregarArista("B", "C");
+	    g.agregarArista("B", "F");
+	    g.agregarArista("C", "D");
+	    g.agregarArista("C", "E");
+	    g.agregarArista("D", "E");
+	    g.agregarArista("D", "A");
+
+	    assertNotEquals(null, g.caminoHamiltoneano());
 	}
 	
 	@After
