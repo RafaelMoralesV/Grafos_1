@@ -194,6 +194,8 @@ public class Grafo {
 					
 					if(grado2 + grado1 == gradovertinicial + gradovertfinal) {
 						System.out.println("El grafo es hamiltoniano");
+					}else{
+						System.out.println("El grafo no es hamiltoniano");
 					}
 				}
 			}
