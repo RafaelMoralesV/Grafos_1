@@ -1,6 +1,5 @@
 package webapps;
 
-import trabajo.Grafo;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,30 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GrafosServlet
+ * Servlet implementation class asdf
  */
-public class GrafosServlet extends HttpServlet {
+public class asdf extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Grafo g;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GrafosServlet() {
+    public asdf() {
         super();
         // TODO Auto-generated constructor stub
-        g = new Grafo();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String output = g.toString();
-		
-		System.out.print(output);
-		response.setContentType("text/plain");
-		response.getWriter().write(output);
+		String userName = request.getParameter("userName").trim();
+        if(userName == null || "".equals(userName)){
+            userName = "Guest";
+        }
+
+        String greetings = "Hello " + userName;         
+        response.setContentType("text/plain");
+        response.getWriter().write(greetings);
 	}
 
 	/**
@@ -39,22 +39,7 @@ public class GrafosServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nombreVertice = request.getParameter("nombreVertice");
-		if(nombreVertice != null) {
-			g.agregarVertice(nombreVertice);
-		}
-		String aristaA = request.getParameter("aristaA");
-		String aristaB = request.getParameter("aristaB");
-		if(aristaA != null && aristaB != null) {
-			if(request.getParameter("bidir") != null) {
-				g.agregarArista(aristaA, aristaB);
-			}
-			if(request.getParameter("dir") != null) {
-				g.agregarAristaDir(aristaA, aristaB);
-			}
-		}
-		response.sendRedirect("/Grafos_1");
-		//doGet(request, response);
+		doGet(request, response);
 	}
 
 }
