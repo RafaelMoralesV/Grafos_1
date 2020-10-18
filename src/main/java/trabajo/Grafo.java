@@ -39,6 +39,19 @@ public class Grafo {
 		// Retorna los vertices adyacentes a <vertice> o una lista vacia si el vertice no existe
 		return (this.existsIn(vertice))?vertAdyacentes.get(new Vertice(vertice)):Collections.emptyList();
 	}
+	
+	public boolean esNoDirigido() {
+		// A partir de la matriz de adyacencia, define si el grafo es o no dirigido.
+		boolean[][] grafo = this.generarMatrizAdyacencia();
+		for(int i = 0; i < this.sizeVertices(); i++) {
+			for(int j = i; j < this.sizeVertices(); j++) {
+				if(grafo[i][j] != grafo[j][i]) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	// 						//
 	// 		ARISTAS 		//

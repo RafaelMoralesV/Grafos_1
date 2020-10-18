@@ -64,6 +64,15 @@ public class TestGrafo {
 	
 	// PRUEBAS SOBRE PROPIEDADES DEL GRAFO
 	
+	@Test public void testEsNoDirigido() {
+		// Actualmente el grafo es simple o no dirigido
+		assertTrue(testUno.esNoDirigido());
+		
+		// Ahora al volverlo dirigido, el resultado cambia
+		testUno.agregarAristaDir("A", "C");
+		assertFalse(testUno.esNoDirigido());
+	}
+	
 	@Test public void testCaminoHamiltoniano() {
 		Grafo g = new Grafo();
 		g.agregarVertice("A");
