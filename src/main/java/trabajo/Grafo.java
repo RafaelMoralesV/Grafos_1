@@ -132,9 +132,10 @@ public class Grafo {
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		boolean[][] matrizAdy = this.generarMatrizAdyacencia();
-
+		
+		ArrayList<Vertice> l = new ArrayList<>(vertAdyacentes.keySet());
 		for (int i = 0; i < vertAdyacentes.size(); i++) {
-			s.append(i + ": ");
+			s.append(l.get(i).getNombre() + ": ");
 			for (boolean j : matrizAdy[i]) {
 				s.append((j ? 1 : 0) + " ");
 			}
@@ -142,6 +143,19 @@ public class Grafo {
 		}
 		return s.toString();
 
+	}
+	
+	public String graphToString(boolean[][] matrizAdy) {
+		StringBuilder s = new StringBuilder();
+		
+		for (int i = 0; i < vertAdyacentes.size(); i++) {
+			s.append(i + ": ");
+			for (boolean j : matrizAdy[i]) {
+				s.append((j ? 1 : 0) + " ");
+			}
+			s.append("<br />");
+		}
+		return s.toString();
 	}
 	
 	

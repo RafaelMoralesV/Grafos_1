@@ -103,7 +103,7 @@ public class TestGrafo {
 	// PRUEBAS SOBRE UTILIDADES
 	
 	@Test public void testToString() {
-		String stringEsperada = "0: 0 1 0 \n1: 1 0 0 \n2: 0 0 0 \n";
+		String stringEsperada = "A: 0 1 0 \nB: 1 0 0 \nC: 0 0 0 \n";
 		assertEquals(stringEsperada, testUno.toString());
 	}
 	

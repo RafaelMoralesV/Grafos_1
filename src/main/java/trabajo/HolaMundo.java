@@ -8,7 +8,5 @@ public class HolaMundo{
 		 * TODO:
 		 * 	- Funcionalidad camino Euleriano
 		 */
-		
-		
 	}
 }

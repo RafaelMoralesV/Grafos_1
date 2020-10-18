@@ -54,9 +54,9 @@ jacocoTestReport {
     }
 }
 
-application{
-	mainClass='trabajo.HolaMundo'
-}
+//application{
+//	mainClass='trabajo.HolaMundo'
+//}
 
 war{
 	webAppDirName="./WebContent"
