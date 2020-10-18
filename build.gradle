@@ -30,6 +30,8 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    providedCompile "javax.servlet:servlet-api:2.5"
 }
 
 // This makes sure the version is compatible
@@ -37,12 +39,6 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 // Project version
 version = '0.1'
-
-// Sets up the main class for the application plugin
-application{
-	mainClass = 'trabajo.HolaMundo'
-}
-
 
 // Sets up the main class for the jar files
 jar {
@@ -56,4 +52,12 @@ jacocoTestReport {
     reports {
         xml.enabled true
     }
+}
+
+application{
+	mainClass='trabajo.HolaMundo'
+}
+
+war{
+	webAppDirName="./WebContent"
 }
