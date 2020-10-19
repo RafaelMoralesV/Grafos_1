@@ -130,6 +130,19 @@ public class GrafoPesado extends Grafo {
 		return s.toString();
 	}
 	
+	public String toStringPeso(float[][] grafo) {
+		StringBuilder s = new StringBuilder();
+		
+		for (int i = 0; i < vertAdyacentes.size(); i++) {
+			s.append(i + ": ");
+			for (float j : grafo[i]) {
+				s.append((j==-1?"-":j) + " ");
+			}
+			s.append("\n");
+		}
+		return s.toString();
+	}
+	
 	
 	// DIJKSTRA
 	
